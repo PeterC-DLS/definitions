@@ -54,6 +54,31 @@
         </group>
         <group type="NXmonochromator" name="monochromator">
           <field name="wavelength" type="NX_FLOAT"></field>
+      </group>
+      <group name="beam" type="NXbeam">
+          <doc>
+            Instance of NXbeam storing all relevant information about the beam
+            right before the sample as far as this information is required and 
+            accessible.
+          </doc>
+          <group name="energy_dispersion" type="NXdata">
+              <doc>
+                Instance of NXdata storing the intensity of the beam as a
+                function of the energy. This might be necessary to normalize the
+                recorded data.
+              </doc>
+              <field name="energy" type="NX_FLOAT">
+                    <dimensions rank="1">
+                        <dim index="1" value="n">
+                    </dimensions>
+                </field>
+
+                <field name="intensity" type="NX_FLOAT">
+                    <dimensions rank="1">
+                        <dim index="1" value="n">
+                    </dimensions>
+                </field>
+          </group>
         </group>
         <group type="NXdetector" name="fluorescence">
             <field name="data" type="NX_INT" axes="energy" signal="1">
