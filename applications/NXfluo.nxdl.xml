@@ -56,14 +56,28 @@
           <field name="wavelength" type="NX_FLOAT"></field>
         </group>
         <group type="NXdetector" name="fluorescence">
-          <field name="data" type="NX_INT" axes="energy" signal="1">
-            <dimensions rank="1">
-              <dim index="1" value="nenergy" />
+            <field name="data" type="NX_INT" axes="energy" signal="1">
+                <doc>
+                    The first dimension is the number of points recorded during
+                    the scan while the second one is the number of "channels" of
+                    the detector. If the field has only one dimension no scan has
+                    been performed. 
+                </doc>
+              <dimensions rank="2">
+              <dim index="1" value="npoints" />
+              <dim index="2" value="nenergy" />
             </dimensions>
           </field>
           <field name="energy" type="NX_FLOAT">
-            <dimensions rank="1">
-              <dim index="1" value="nenergy" />
+              <doc>
+                  The dimensions are the same as for the data field. 
+                  However, if the energy values of the individual channels
+                  remain constant during the scan the first dimension can be
+                  omitted.
+              </doc>
+            <dimensions rank="2">
+                <dim index="1" value="npoints" />
+                <dim index="2" value="nenergy" />
             </dimensions>
           </field>
         </group>
@@ -71,7 +85,25 @@
       <group type="NXsample">
         <field name="name">
           <doc>Descriptive name of sample</doc>
-        </field>
+      </field>
+      <field name="x_transation" type="NX_FLOAT">
+          <doc>
+              x-position of the sample with respect to the beam position. 
+          </doc>
+          <dimensions rank="1">
+              <dim index="1" value="npoints" />
+          </dimensions>
+      </field>
+
+      <field name="y_translation" type="NX_FLOAT">
+          <doc>
+              y-position of the sample with respect to the beam position.
+          </doc>
+          <dimensions rank="1">
+              <dim index="1" value="npoints" />
+          </dimensions>
+      </field>
+
       </group>
       <group type="NXmonitor">
         <field name="mode">
