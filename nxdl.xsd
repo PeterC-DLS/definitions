@@ -138,6 +138,80 @@
 	
 	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	
+	<xs:attributeGroup name="dependenciesAttributes">
+		<xs:attribute name="depends_on">
+			<xs:annotation>
+				<xs:documentation>
+					HDF5 (absolute, not relative) path to next transformation field.
+					This is a linked list.  The field at the end of the linked list
+					has the attribute value: ``depends_on="."``  
+					
+					For example, this is a translation::
+					
+					  /entry:NXentry
+					    sample:NXsample
+					      x = 5.0
+					        @depends_on = .
+					        @offset = [ 0.  0.  1.2345 ]
+					        
+					.. write how each step is used
+
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="transformation_type">
+			<xs:annotation>
+				<xs:documentation>
+					There are only two types of transformation.
+				</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="rotation"/>
+					<xs:enumeration value="translation"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="vector" type="nx:NX_FLOAT">
+			<xs:annotation>
+				<xs:documentation>
+					Describes an orientation vector with respect to the :math:`x`,
+					:math:`y`, and  :math:`z` coordinate axes.
+					The value is an array with 3 floating point values.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="vector_units" type="nx:anyUnitsAttr">
+			<xs:annotation>
+				<xs:documentation>
+					String describing the engineering units of the vector attribute.
+					The string should be appropriate for the value
+					and should conform to the NeXus rules for units.
+					Conformance is not validated at this time.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="offset" type="nx:NX_FLOAT">
+			<xs:annotation>
+				<xs:documentation>
+					Describes an offset with respect to the :math:`x`,
+					:math:`y`, and  :math:`z` coordinate axes.
+					The value is an array with 3 floating point values.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="offset_units" type="nx:anyUnitsAttr">
+			<xs:annotation>
+				<xs:documentation>
+					String describing the engineering units of the offset attribute.
+					The string should be appropriate for the value
+					and should conform to the NeXus rules for units.
+					Conformance is not validated at this time.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	
 	<xs:attributeGroup name="deprecatedAttributeGroup">
 		<xs:attribute name="deprecated" use="optional">
 			<xs:annotation>
@@ -167,6 +241,8 @@
 			</xs:simpleType>
 		</xs:attribute>
 	</xs:attributeGroup>
+	
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
 	<xs:complexType name="definitionType">
 		<xs:annotation>
@@ -811,6 +887,7 @@
                         </xs:restriction>
 					</xs:simpleType>
 				</xs:attribute>
+				<xs:attributeGroup ref="nx:dependenciesAttributes" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
