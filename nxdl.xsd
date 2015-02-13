@@ -826,10 +826,10 @@
 						</xs:documentation>
 					</xs:annotation>
 				</xs:attribute>
-				<xs:attribute name="offset" use="optional"  default="1" type="nx:nonNegativeUnbounded">
+				<xs:attribute name="data_offset" use="optional"  default="1" type="nx:nonNegativeUnbounded">
 					<xs:annotation>
 						<xs:documentation>
-							The ``stride`` and ``offset`` attributes
+							The ``stride`` and ``data_offset`` attributes
 							are used together to index the array of data items in a 
 							multi-dimensional array.  They may be used as an alternative
 							method to address a data array that is not stored in the standard NeXus
@@ -851,6 +851,9 @@
 							is equal to the rank of the data being stored.  The value of each
 							item is the offset in the array of the first data item of that 
 							subscript of the array.
+							
+							Note: This attribute was renamed from *offset* per:
+							https://github.com/nexusformat/definitions/issues/273#issuecomment-74168129
 						</xs:documentation>
 					</xs:annotation>
 				</xs:attribute>
