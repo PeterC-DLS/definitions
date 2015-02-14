@@ -138,13 +138,14 @@
 	
 	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	
-	<xs:attributeGroup name="dependenciesAttributes">
+	<xs:attributeGroup name="transformationsAttributes">
 		<xs:attribute name="depends_on">
 			<xs:annotation>
 				<xs:documentation>
-					HDF5 (absolute, not relative) path to next transformation field.
+					HDF5 path (absolute, not relative) to next field in the sequence
+					of coordinate transformations to be applied.
 					This is a linked list.  The field at the end of the linked list
-					has the attribute value: ``depends_on="."``  
+					has the attribute value: ``.``  
 					
 					For example, this is a translation::
 					
@@ -153,7 +154,40 @@
 					      x = 5.0
 					        @depends_on = .
 					        @offset = [ 0.  0.  1.2345 ]
-					        
+					
+					A more complex example starts with::
+
+					    y_pixel_offset:NX_FLOAT64[2527] = 
+					    	[0.0, 0.00017200000000000001, 0.00034400000000000001, '...', 0.43447200000000002]
+					      @units = m
+					      @vector = [ 0.  1.  0.]
+					      @transformation_type = translation
+					      @depends_on = /entry/instrument/detector/transformations/rotation
+
+					The next transformation in the chain::
+
+					   /entry/instrument/detector/transformations/rotation:NX_FLOAT64[450] = 
+					   			[180.0, 180.0, 180.0, '...', 180.0]
+					        @units = deg
+					        @transformation_type = rotation
+					        @depends_on = /entry/instrument/detector/transformations/translation
+					        @vector = [ 0.  0.  1.]
+
+					and the dependencies chain ends with::
+
+					   /entry/instrument/detector/transformations/translation:NX_FLOAT64[450] = 
+					   			[0.26880999999999999, 
+					   			 0.26880999999999999, 
+					   			 0.26880999999999999, 
+					   			 '...', 
+					   			 0.26880999999999999]
+					        @units = m
+					        @offset_units = m
+					        @transformation_type = translation
+					        @depends_on = .
+					        @vector = [ 0.  0.  1.]
+					        @offset = [-0.21472652 -0.20996384  0.        ]
+
 					.. write how each step is used
 
 				</xs:documentation>
@@ -890,7 +924,7 @@
                         </xs:restriction>
 					</xs:simpleType>
 				</xs:attribute>
-				<xs:attributeGroup ref="nx:dependenciesAttributes" />
+				<xs:attributeGroup ref="nx:transformationsAttributes" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
