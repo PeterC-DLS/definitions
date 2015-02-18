@@ -69,8 +69,12 @@
 		</attribute>
 		<attribute name="depends_on" type="NX_CHAR">
 			<doc>
-				Points to the path of the next field in the 
-				transformations (*depends_on*) chain.
+				Defines the absolute HDF5 path of the next field in the 
+				transformations (a.k.a.:  geometry, *depends_on*) chain
+				that places this object in space.
+				The final component of that chain has the
+				attribute ``depends_on="."``, signifying the origin 
+				of the coordinate system. 
 			</doc>
 		</attribute>
 	</field>

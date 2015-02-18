@@ -327,14 +327,25 @@
 		<xs:attribute name="depends_on">
 			<xs:annotation>
 				<xs:documentation>
-					Points to the path of the next field in the 
-					transformations (*depends_on*) chain.
+					Defines the absolute HDF5 path of the next field in the 
+					transformations (a.k.a.:  geometry, *depends_on*) chain
+					that places this object in space.
+					The final component of that chain has the
+					attribute ``depends_on="."``, signifying the origin 
+					of the coordinate system. 
 					
-					The value of *depends_on* is an
-					HDF5 path (absolute, not relative) to next field in the sequence
+					The value of *depends_on* must be an absolute 
+					HDF5 path to the next step in the sequence
 					of coordinate transformations to be applied.
-					This is a linked list.  The field at the end of the linked list
-					has the attribute value: ``.``  
+					This is a linked list.
+					
+					 :absolute paths are necessary:
+						 To ensure that the *depends_on* chain still works with 
+						 linked fields, the value of *depends_on* should be an 
+						 absolute HDF5 address, such as 
+						 ``/entry/instrument/detector/transformations/rotation``.
+						 A relative address, such as ``rotation`` likely would break
+						 when the parent field is used as a link elsewhere in the HDF5 file..
 					
 					For example, this is a translation::
 					
@@ -378,12 +389,6 @@
 					        @offset = [-0.21472652 -0.20996384  0.        ]
 
 					.. write how each step is used
-					
-					 :absolute paths are necessary:
-						 To ensure that the *depends_on* chain still works with 
-						 linked fields, the value of *depends_on* should be an 
-						 absolute HDF5 address, not an address relative (such 
-						 as without any path) to the instance.
 
 				</xs:documentation>
 			</xs:annotation>
