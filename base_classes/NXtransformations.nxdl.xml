@@ -69,7 +69,8 @@
 		</attribute>
 		<attribute name="depends_on" type="NX_CHAR">
 			<doc>
-				Points to the path of the next element in the geometry chain.
+				Points to the path of the next field in the 
+				transformations (*depends_on*) chain.
 			</doc>
 		</attribute>
 	</field>
