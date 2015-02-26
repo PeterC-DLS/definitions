@@ -245,7 +245,7 @@ man_pages = [
 epub_title = u'NeXus: User Guide and Reference Documentation'
 epub_author = u'http://nexusformat.org'
 epub_publisher = u'http://nexusformat.org'
-epub_copyright = u'2012, http://nexusformat.org'
+epub_copyright = u'2015, http://nexusformat.org'
 
 # The language of the text. It defaults to the language option
 # or en if the language is not set.
