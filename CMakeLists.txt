@@ -4,7 +4,7 @@
 #  
 #  CMakeLists for building the NeXus library and applications.
 #
-# Copyright (C) 2008-2014 NeXus International Advisory Committee (NIAC)
+# Copyright (C) 2008-2015 NeXus International Advisory Committee (NIAC)
 #  
 #  This library is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU Lesser General Public
@@ -73,7 +73,10 @@ foreach(F ${XSD_FILES})
     configure_release("DoXSD" ${CMAKE_SOURCE_DIR}/${F} ${CMAKE_BINARY_DIR}/dist/${F})
 endforeach()
 
-option (BUILD_SPHINX "Build documentation using sphinx" ON)
+# 2015-02-26,PRJ: per issue 391, cmake builds with Sphinx are off 
+# until cmake build process is ready for production use,
+# including incremental builds and sidebar content
+#option (BUILD_SPHINX "Build documentation using sphinx" ON)
 
 # CMAKE_INSTALL_PREFIX is only used if CMAKE_SET_DESTDIR is true,
 # so it will not be used in zip and tgz packages
@@ -128,7 +131,7 @@ add_subdirectory (base_classes)
 add_subdirectory (contributed_definitions)
 add_subdirectory (applications)
 add_subdirectory (schema)
-add_subdirectory (manual)
+#2015-02-26,PRJ: issue 391 # add_subdirectory (manual)
 add_subdirectory (validate_cmdline)
 
 foreach(F ${XSD_FILES})
@@ -139,7 +142,7 @@ FILE(GLOB XSLT_FILES "xslt/*.xsl")
 INSTALL(FILES ${XSLT_FILES} DESTINATION ${NEXUS_DEFINITIONS}/xslt COMPONENT definitions)
 
 INSTALL(FILES LGPL.txt DESTINATION ${NEXUS_DEFINITIONS} COMPONENT definitions)
-INSTALL(FILES LGPL.txt DESTINATION ${NEXUS_MANUAL} COMPONENT manual)
+#2015-02-26,PRJ: issue 391 # INSTALL(FILES LGPL.txt DESTINATION ${NEXUS_MANUAL} COMPONENT manual)
 
 #
 # set CPack packaging options
