@@ -1,0 +1,18 @@
+$Id: README 841 2011-05-18 20:35:30Z Pete Jemian $
+
+This directory contained the development area to refactor 
+the NeXus manual from DocBook to Sphinx.
+
+:Sphinx: http://sphinx.pocoo.org/
+
+Typical Builds
+----------------
+
+These commands are useful on Linux 
+(from the <definitions>/trunk/sphinx directory):
+
+   make clean
+   make html
+   make latexpdf
+   firefox build/html/index.html &
+   evince build/latex/nexus.pdf &
