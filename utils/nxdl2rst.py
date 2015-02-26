@@ -3,7 +3,7 @@
 # Tested under both python2 and python3.
 
 '''
-Build .rst file for a given NXDL file
+Build .rst for a given NXDL file and print to stdout
 
 Read the NeXus NXDL class specification and describe it.  
 Write a restructured text (.rst) document for use in the NeXus manual in 
