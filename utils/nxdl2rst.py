@@ -3,6 +3,8 @@
 # Tested under both python2 and python3.
 
 '''
+Build .rst file for a given NXDL file
+
 Read the NeXus NXDL class specification and describe it.  
 Write a restructured text (.rst) document for use in the NeXus manual in 
 the NeXus NXDL Classes chapter.
@@ -274,7 +276,7 @@ def main():
     
     # retrieve category from directory
     subdir = os.path.split(os.path.split(tree.docinfo.URL)[0])[1]
-    # TODO: check for consistency with root.get('category')
+    # don't enforce consistency with root.get('category'), NXDL files might be re-categorized
     category_for_listing = {
                  'base_classes': 'base class',
                  'applications': 'application definition',
